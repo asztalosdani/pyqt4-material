@@ -1,0 +1,23 @@
+QLineEdit {
+    font-family: Roboto;
+    color: rgba(0, 0, 0, 87%);
+    background-color: transparent;
+    border : 0px solid blue;
+    border-bottom : 1px solid rgba(0, 0, 0, 42%);
+    padding-bottom: 8px;
+    padding-top: 16px;/*16px;*/
+    font-size: 16px;
+}
+QLineEdit:disabled {
+    border-style: dotted;
+    border-width: 0px 0px 1px 0px;
+    color: rgba(0, 0, 0, 38%)
+}
+QLineEdit:hover {
+    border-width: 0px 0px 2px 0px;
+    border-color: rgba(0, 0, 0, 87%)
+}
+QLineEdit:focus {
+    border-width: 0px 0px 2px 0px;
+    border-color: rgba(@primary_rgb, 87%); /*primary color*/
+}

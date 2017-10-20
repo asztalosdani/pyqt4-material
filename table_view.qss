@@ -1,0 +1,8 @@
+QTableView {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 87%);
+}
+QHeaderView::section {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 54%);
+}

@@ -1,0 +1,49 @@
+QWidget {
+    background-color: @background_color;
+    /*border: 1px solid red;*/ /*for debug purposes*/
+}
+
+QToolTip {
+    background-color: rgba(97, 97, 97, 90%);
+    opacity: 90%;
+    border-radius: 2px;
+    color: white;
+    min-height: 22px;
+    padding: 6px 8px;
+    font-size: 12px;
+}
+
+
+
+QMenuBar::item {
+    spacing: 3px; /* spacing between menu bar items */
+    padding: 1px 4px;
+    background: transparent;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    background: #a8a8a8;
+}
+
+QMenuBar::item:pressed {
+    background: #888888;
+}
+
+QMenu {
+    background-color: #FFFFFF; /* sets background of the menu */
+    border: none;
+    padding: 8px 0px;
+}
+
+QMenu::item {
+    /* sets background of menu item. set this to something non-transparent
+        if you want menu color and menu item color to be different */
+    background-color: transparent;
+    font: 13px;
+    padding: 4px 24px;
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+    background-color: @primary_color;
+}

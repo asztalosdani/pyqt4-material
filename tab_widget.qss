@@ -1,0 +1,18 @@
+QTabBar::tab {
+    background-color: @primary_color;
+    border: none;
+    padding: 20px 24px;
+    font-size: 13px; /*Roboto medium*/
+    color: rgba(255, 255, 255, 70%);
+}
+QTabBar::tab:first {
+    margin-left: 56px;
+}
+QTabBar::tab:selected {
+    border-bottom: 2px solid @secondary_color; /* #ffffff if no secondary provided */
+    padding-bottom: 18px;
+    color: #ffffff;
+}
+QTabBar {
+    background-color: @primary_color;
+}

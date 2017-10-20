@@ -1,0 +1,30 @@
+QComboBox {
+    border: none;
+    border-bottom : 1px solid rgba(0, 0, 0, 42%);
+    padding: 16px 0px 16px 24px;
+}
+
+QComboBox::drop-down {
+    /*image: url(:/bwt/downarrow.png);
+    subcontrol-position: center right;
+    margin-right: 10px;*/
+    border:none;
+}
+QComboBox QAbstractItemView::item {
+    padding: 5px 0px 5px 24px;
+    font-size: 5px;
+    border: none;
+}
+QComboBox QAbstractItemView::item:hover {
+    background-color: #EEEEEE;
+    border:none;
+    color: #000000;
+}
+QComboBox QAbstractItemView {
+    background: transparent;
+    border-top : 1px solid rgba(0, 0, 0, 42%);
+    padding: 8px 0px;
+    show-decoration-selected: false;
+    selection-color: black;
+    selection-background-color: darkblue;
+}
