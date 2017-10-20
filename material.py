@@ -25,8 +25,20 @@ def _get_secondary_color():
     return _get_property(PROPERTY_SECONDARY_COLOR, "#FFFFFFF")
 
 
+def _get_status_bar_color():
+    return "#E0E0E0" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#000000"
+
+
+def _get_app_bar_color():
+    return "#F5F5F5" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#212121"
+
+
 def _get_background_color():
     return "#FAFAFA" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#303030"
+
+
+def _get_card_color():
+    return "#FFFFFF" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#424242"
 
 
 def _get_stylesheet(file_name):
@@ -36,12 +48,15 @@ def _get_stylesheet(file_name):
     c = QtGui.QColor(primary_color)
     primary_rgb = "{r},{g},{b}".format(r=c.red(), g=c.green(), b=c.blue())
     background_color = _get_background_color()
+    card_color = _get_card_color()
+
     with open(file_name) as f:
         raw_style_sheet = f.read()
         style_sheet = (raw_style_sheet.replace("@background_color", background_color)
-                                      .replace("@primary_color", primary_color)
-                                      .replace("@primary_rgb", primary_rgb)
-                                      .replace("@secondary_color", secondary_color))
+                       .replace("@card_color", card_color)
+                       .replace("@primary_color", primary_color)
+                       .replace("@primary_rgb", primary_rgb)
+                       .replace("@secondary_color", secondary_color))
     return style_sheet
 
 

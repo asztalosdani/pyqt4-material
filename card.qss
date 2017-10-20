@@ -1,4 +1,4 @@
 QWidget {
-    background-color: white;
+    background-color: @card_color;
     border-radius: 2px;
 }
