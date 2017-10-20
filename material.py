@@ -1,7 +1,6 @@
 from PyQt4 import QtGui, QtCore
 
-from material_test.material_shadow import MaterialShadowEffect
-from shadow import CustomShadowEffect
+from material_shadow import MaterialShadowEffect
 
 THEME_LIGHT = "light"
 THEME_DARK = "dark"

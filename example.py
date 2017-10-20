@@ -2,8 +2,8 @@ import sys
 from PyQt4 import QtGui, QtCore
 
 import material
-from material_test.material_shadow import MaterialShadowEffect
-from material_test.shadow import CustomShadowEffect
+from material_shadow import MaterialShadowEffect
+from shadow import CustomShadowEffect
 
 
 class Example(material.MainWindow):
