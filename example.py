@@ -105,6 +105,8 @@ class Example(material.MainWindow):
 
         card1.add_title("Title goes here")
         card1.add_subtitle("Subtitle here")
+        image = QtGui.QPixmap("test_image1.jpeg")
+        card1.add_image(image.scaled(400, 500, QtCore.Qt.KeepAspectRatio))
         card1.add_supporting_text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
         card1.add_actions([material.FlatButton("action 1"), material.FlatButton("action 2")])
 
@@ -127,7 +129,11 @@ class Example(material.MainWindow):
 
         page = QtGui.QWidget()
         page.setLayout(main_layout)
-        return page
+        page.setMaximumWidth(400)
+        scroll_area = QtGui.QScrollArea()
+        scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        scroll_area.setWidget(page)
+        return scroll_area
 
     def _create_menu(self):
         menu_bar = self.menuBar()

@@ -225,6 +225,12 @@ class Card(QtGui.QFrame):
             self.effect.set_elevation(0)
         QtGui.QFrame.leaveEvent(self, event)
 
+    def add_image(self, image):
+        image_label = QtGui.QLabel()
+        image_label.setPixmap(image)
+        self._layout.addWidget(image_label)
+        return image_label
+
     def add_title(self, title):
         title_label = QtGui.QLabel(title)
         title_label.setProperty(PROPERTY_CLASS, self.CLASS_TITLE)
