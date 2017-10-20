@@ -8,6 +8,7 @@ THEME_DARK = "dark"
 PROPERTY_THEME = "theme"
 PROPERTY_PRIMARY_COLOR = "primary_color"
 PROPERTY_SECONDARY_COLOR = "secondary_color"
+PROPERTY_CLASS = "class"
 
 
 def _get_property(key, default):
@@ -25,20 +26,44 @@ def _get_secondary_color():
     return _get_property(PROPERTY_SECONDARY_COLOR, "#FFFFFFF")
 
 
+def _light_theme_selected():
+    return _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT
+
+
+def _get_value_based_on_theme(light_value, dark_value):
+    return light_value if _light_theme_selected() else dark_value
+
+
 def _get_status_bar_color():
-    return "#E0E0E0" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#000000"
+    return _get_value_based_on_theme("#E0E0E0", "#000000")
 
 
 def _get_app_bar_color():
-    return "#F5F5F5" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#212121"
+    return _get_value_based_on_theme("#F5F5F5", "#212121")
 
 
 def _get_background_color():
-    return "#FAFAFA" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#303030"
+    return _get_value_based_on_theme("#FAFAFA", "#303030")
 
 
 def _get_card_color():
-    return "#FFFFFF" if _get_property(PROPERTY_THEME, THEME_LIGHT) == THEME_LIGHT else "#424242"
+    return _get_value_based_on_theme("#FFFFFF", "#424242")
+
+
+def _get_primary_text_color():
+    return _get_value_based_on_theme("rgba(0, 0, 0, 87%)", "rgba(255, 255, 255, 100%)")
+
+
+def _get_secondary_text_color():
+    return _get_value_based_on_theme("rgba(0, 0, 0, 54%)", "rgba(255, 255, 255, 70%)")
+
+
+def _get_disabled_or_hint_text_color():
+    return _get_value_based_on_theme("rgba(0, 0, 0, 38%)", "rgba(255, 255, 255, 50%)")
+
+
+def _get_disabled_button_text_color():
+    return _get_value_based_on_theme("rgba(0, 0, 0, 26%)", "rgba(255, 255, 255, 30%)")
 
 
 def _get_stylesheet(file_name):
@@ -54,6 +79,10 @@ def _get_stylesheet(file_name):
         raw_style_sheet = f.read()
         style_sheet = (raw_style_sheet.replace("@background_color", background_color)
                        .replace("@card_color", card_color)
+                       .replace("@primary_text_color", _get_primary_text_color())
+                       .replace("@secondary_text_color", _get_secondary_text_color())
+                       .replace("@disabled_or_hint_text_color", _get_disabled_or_hint_text_color())
+                       .replace("@disabled_button_text_color", _get_disabled_button_text_color())
                        .replace("@primary_color", primary_color)
                        .replace("@primary_rgb", primary_rgb)
                        .replace("@secondary_color", secondary_color))
@@ -106,8 +135,8 @@ class RaisedButton(QtGui.QPushButton):
 
 
 class FlatButton(QtGui.QPushButton):
-    def __init__(self, *__args):
-        QtGui.QPushButton.__init__(self, *__args)
+    def __init__(self, text):
+        QtGui.QPushButton.__init__(self, text.upper())
 
         style_sheet = _get_stylesheet("flat_button.qss")
         self.setStyleSheet(style_sheet)
@@ -164,6 +193,14 @@ class Dropdown(QtGui.QComboBox):
 
 
 class Card(QtGui.QFrame):
+
+    CLASS_TITLE = "title"
+    CLASS_SUBTITLE = "subtitle"
+    CLASS_SUPPORTING_TEXT = "supporting_text"
+
+    DIRECTION_HORIZONTAL = 1
+    DIRECTION_VERTICAL = 2
+
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
 
@@ -172,6 +209,11 @@ class Card(QtGui.QFrame):
 
         self.effect = MaterialShadowEffect(self.parent())
         self.setGraphicsEffect(self.effect)
+
+        self._layout = QtGui.QVBoxLayout()
+        self._layout.setSpacing(0)
+        self._layout.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self._layout)
 
     def enterEvent(self, event):
         if self.isEnabled():
@@ -183,24 +225,45 @@ class Card(QtGui.QFrame):
             self.effect.set_elevation(0)
         QtGui.QFrame.leaveEvent(self, event)
 
+    def add_title(self, title):
+        title_label = QtGui.QLabel(title)
+        title_label.setProperty(PROPERTY_CLASS, self.CLASS_TITLE)
+        self._layout.addWidget(title_label)
+        return title_label
 
-# class ShadowStuff(QtGui.QGraphicsDropShadowEffect):
-#     def draw(self, painter):
-#         if self.blurRadius() <= 0 and self.offset().isNull():
-#             self.drawSource(painter)
-#             return
-#
-#         mode = QtGui.QGraphicsDropShadowEffect.PadToEffectiveBoundingRect
-#         if painter.paintEngine().type() == QtGui.QPaintEngine.OpenGL2:
-#             mode = QtGui.QGraphicsDropShadowEffect.NoPad
-#
-#         # Draw pixmap in device coordinates to avoid pixmap scaling.
-#         offset = QtCore.QPoint()
-#         pixmap = self.sourcePixmap(QtCore.Qt.DeviceCoordinates, mode=mode)
-#         if not pixmap:
-#             return
-#
-#         restore_transform = painter.worldTransform()
-#         painter.setWorldTransform(QtGui.QTransform())
-#         self.filter.draw(painter, offset, pixmap)
-#         painter.setWorldTransform(restore_transform)
+    def add_subtitle(self, subtitle):
+        subtitle_label = QtGui.QLabel(subtitle)
+        subtitle_label.setProperty(PROPERTY_CLASS, self.CLASS_SUBTITLE)
+        self._layout.addWidget(subtitle_label)
+        return subtitle_label
+
+    def add_supporting_text(self, supporting_text):
+        supporting_text_label = QtGui.QLabel(supporting_text)
+        supporting_text_label.setProperty(PROPERTY_CLASS, self.CLASS_SUPPORTING_TEXT)
+        supporting_text_label.setWordWrap(True)
+        self._layout.addWidget(supporting_text_label)
+        return supporting_text_label
+
+    def add_actions(self, actions, direction=DIRECTION_HORIZONTAL):
+        if direction == self.DIRECTION_HORIZONTAL:
+            button_layout = QtGui.QHBoxLayout()
+        else:
+            button_layout = QtGui.QVBoxLayout()
+
+        self._layout.addLayout(button_layout)
+        button_layout.setSpacing(8)
+        button_layout.setContentsMargins(8, 8, 8, 8)
+
+        for action in actions:
+            if direction == self.DIRECTION_HORIZONTAL:
+                button_layout.addWidget(action)
+            else:
+                row = QtGui.QHBoxLayout()
+                row.addWidget(action)
+                row.addStretch()
+                button_layout.addLayout(row)
+
+        if direction == self.DIRECTION_HORIZONTAL:
+            button_layout.addStretch()
+
+

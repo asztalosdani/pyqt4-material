@@ -1,22 +1,22 @@
 QPushButton {
-    background-color: @background_color;
-    color: black;
+    background-color: transparent;
+    color: @primary_text_color;
     border-radius: 2px;
     padding: 5px 16px;
     margin: 0px;
     border: none;
+    font-size: 13px;
+    font-weight: medium;
 }
 
 QPushButton:hover {
     background-color: rgba(0, 0, 0, 12%);
-    color: black;
 }
 
 QPushButton:pressed {
     background-color: rgba(153, 153, 153, 40%);
-    color: black;
 }
 
 QPushButton:disabled {
-    color: rgba(0, 0, 0, 26%)
+    color: @disabled_button_text_color;
 }

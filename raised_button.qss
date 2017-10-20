@@ -5,8 +5,10 @@ QPushButton {
     padding: 5px 16px;
     margin: 0px;
     border: none;
+    font-size: 13px;
+    font-weight: medium;
 }
 QPushButton:disabled {
     background-color: rgba(0, 0, 0, 12%);
-    color: rgba(0, 0, 0, 26%)
+    color: @disabled_button_text_color;
 }

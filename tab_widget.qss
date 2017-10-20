@@ -16,3 +16,6 @@ QTabBar::tab:selected {
 QTabBar {
     background-color: @primary_color;
 }
+QTabWidget::pane {
+    border: none;
+}

@@ -22,7 +22,7 @@ class Example(material.MainWindow):
         tab.addTab(self._create_page3(), "Page3")
         tab.setCurrentIndex(2)
 
-        self.setMinimumSize(800, 600)
+        self.setMinimumSize(300, 600)
 
     def _create_page1(self):
         main_layout = QtGui.QVBoxLayout()
@@ -101,12 +101,29 @@ class Example(material.MainWindow):
         main_layout = QtGui.QVBoxLayout()
 
         card1 = material.Card()
-        # card1.setFixedSize(200, 200)
         main_layout.addWidget(card1)
 
+        card1.add_title("Title goes here")
+        card1.add_subtitle("Subtitle here")
+        card1.add_supporting_text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+        card1.add_actions([material.FlatButton("action 1"), material.FlatButton("action 2")])
+
         card2 = material.Card()
-        card2.setFixedSize(200, 200)
         main_layout.addWidget(card2)
+
+        card2.add_title("Title goes here")
+        card2.add_subtitle("Subtitle here")
+        text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum leo id imperdiet porttitor. In cursus mauris vitae enim eleifend facilisis. Quisque eu ex sit amet elit rutrum facilisis non a tellus. Ut nulla leo, tristique in aliquam pulvinar, blandit vel ex. Morbi feugiat sem eu tortor facilisis commodo. Donec eu ullamcorper dui. Donec dictum diam non mauris vulputate, pellentesque lobortis turpis fringilla. Fusce vitae urna sapien. Aliquam aliquet tellus sapien. Suspendisse dapibus lectus tellus."
+        card2.add_supporting_text(text)
+
+        card3 = material.Card()
+        main_layout.addWidget(card3)
+
+        card3.add_title("Title goes here")
+        card3.add_subtitle("Subtitle here")
+        card3.add_actions([material.FlatButton("action 1"), material.FlatButton("action 2")], direction=material.Card.DIRECTION_VERTICAL)
+
+        main_layout.addStretch()
 
         page = QtGui.QWidget()
         page.setLayout(main_layout)

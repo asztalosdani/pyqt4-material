@@ -2,3 +2,28 @@ QWidget {
     background-color: @card_color;
     border-radius: 2px;
 }
+
+QLabel {
+    border-radius: 0px;
+    color: @primary_text_color;
+}
+
+QLabel[class="title"] {
+    margin: 0px;
+    font-size: 24px;
+    padding: 16px 24px 12px 24px;
+    /*border: 1px solid red;*/
+}
+
+QLabel[class="subtitle"] {
+    font-size: 14px;
+    padding: 0px 24px 16px 24px;
+    color: @secondary_text_color;
+    /*border: 1px solid green;*/
+}
+
+QLabel[class="supporting_text"] {
+    font-size: 14px;
+    padding: 16px 24px;
+    /*border: 1px solid blue;*/
+}
