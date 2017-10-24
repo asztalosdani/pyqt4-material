@@ -1,6 +1,7 @@
 QWidget {
     background-color: @background_color;
     /*border: 1px solid red;*/ /*for debug purposes*/
+    border: none;
 }
 
 QToolTip {
@@ -46,4 +47,23 @@ QMenu::item {
 
 QMenu::item:selected { /* when user selects item using mouse or keyboard */
     background-color: @primary_color;
+}
+
+QScrollBar {
+    border: none;
+    background-color: @background_color;
+}
+QScrollBar:vertical {
+    width: 5px;
+    padding: 5px 0px;
+}
+QScrollBar:horizontal {
+    height: 5px;
+    padding: 0px 5px;
+}
+QScrollBar::handle {
+    background: @primary_color;
+}
+QScrollBar::add-page, QScrollBar::sub-page, QScrollBar::add-line, QScrollBar::sub-line {
+    background: transparent;
 }
