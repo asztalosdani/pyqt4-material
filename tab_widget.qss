@@ -1,21 +1,25 @@
 QTabBar::tab {
     background-color: @primary_color;
     border: none;
-    padding: 20px 24px;
+    padding: 13px 18px 15px 18px; /*To have 48px height, 20px bottom and 24px side padding...*/
     font-size: 13px; /*Roboto medium*/
     color: rgba(255, 255, 255, 70%);
 }
-QTabBar::tab:first {
-    margin-left: 56px;
+
+/* First tab text left padding: 80dp */
+QTabWidget::tab-bar {
+    left: 56px;
 }
+
 QTabBar::tab:selected {
     border-bottom: 2px solid @secondary_color; /* #ffffff if no secondary provided */
-    padding-bottom: 18px;
+    padding-bottom: 13px;
     color: #ffffff;
 }
-QTabBar {
-    background-color: @primary_color;
-}
+
+/* Background behind the tabs */
 QTabWidget::pane {
-    border: none;
+    border-top: 48px solid @primary_color;
+    position: absolute;
+    top: -48px;
 }
