@@ -1,0 +1,111 @@
+QSlider {
+    height: 30px;
+    width: 30px;
+    background: none;
+}
+
+/* groove */
+
+QSlider::groove {
+    background-color: transparent;
+}
+
+QSlider::groove:hover {
+    background-color: rgba(0, 0, 0, 12%);
+}
+
+QSlider::groove:horizontal {
+    height: 2px;
+    margin: 10px 0;
+}
+
+QSlider::groove:vertical {
+    width: 2px;
+    margin: 0 10px;
+}
+
+/* handle */
+
+QSlider::handle {
+    border: 1px solid @primary_color;
+    background: @primary_color;
+    border-radius: 5px;
+}
+
+QSlider::handle:horizontal {
+    width: 10px;
+    margin: -5px 0;
+}
+
+QSlider::handle:pressed {
+    border-radius: 9px;
+}
+
+QSlider::handle:horizontal:pressed {
+    width: 16px;
+    margin: -8px 0;
+}
+
+QSlider::handle:vertical {
+    height: 10px;
+    margin: 0 -5px;
+}
+
+QSlider::handle:vertical:pressed {
+    height: 16px;
+    margin: 0 -8px;
+}
+
+/* add/sub-page */
+
+QSlider::add-page {
+    background: rgba(0, 0, 0, 26%);
+}
+
+QSlider::add-page:horizontal {
+    margin: 10px 0 10px 5px;
+}
+
+QSlider::add-page:vertical {
+    background: @primary_color;
+    margin: 5px 10px 0 10px;
+}
+
+QSlider::sub-page {
+    background: @primary_color;
+}
+
+QSlider::sub-page:horizontal {
+    margin: 10px 7px 10px 0;
+}
+
+QSlider::sub-page:vertical {
+    background: rgba(0, 0, 0, 26%);
+    margin: 0 10px 7px 10px;
+}
+
+/* disabled */
+
+QSlider::handle:disabled {
+    border: none;
+    background: rgba(0, 0, 0, 26%);
+    border-radius: 4px;
+}
+
+QSlider::handle:horizontal:disabled {
+    width: 8px;
+    margin: -3px 0;
+}
+
+QSlider::handle:vertical:disabled {
+    height: 8px;
+    margin: 0 -3px;
+}
+
+QSlider::sub-page:disabled, QSlider::add-page:disabled {
+    background: rgba(0, 0, 0, 26%);
+}
+
+
+
+

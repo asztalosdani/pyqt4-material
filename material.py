@@ -142,6 +142,27 @@ class FlatButton(QtGui.QPushButton):
         self.setStyleSheet(style_sheet)
 
 
+class Slider(QtGui.QSlider):
+    # https://material.io/guidelines/components/sliders.html#sliders-continuous-slider
+    # TODO implement Swatch color
+    # TODO implement focus highlight
+    # TODO implement zero value empty circle
+
+    def __init__(self, *args):
+        QtGui.QSlider.__init__(self, *args)
+
+        style_sheet = _get_stylesheet("slider.qss")
+        self.setStyleSheet(style_sheet)
+
+    def mousePressEvent(self, event):
+        QtGui.QSlider.mousePressEvent(self, event)
+        self.repaint()  # forcing repaint, because the size of the handle changes, and Qt won't update the bounds
+
+    def mouseReleaseEvent(self, event):
+        QtGui.QSlider.mouseReleaseEvent(self, event)
+        self.repaint()  # forcing repaint, because the size of the handle changes, and Qt won't update the bounds
+
+
 class TextField(QtGui.QLineEdit):
     def __init__(self, *__args):
         QtGui.QLineEdit.__init__(self, *__args)
